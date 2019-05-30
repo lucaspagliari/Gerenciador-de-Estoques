@@ -3,55 +3,91 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Conexoes;
+package conexoes;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
- * @author Prof Lab24
+ * @author Jackson
  */
 public class ConexaoSQLite {
 
     private Connection conexao;
-//conectar - caso nao exista ele cria DB
 
+    /**
+     * Conecta a um banco de dados (cria o banco se ele não existir)
+     *
+     * @return
+     */
     public boolean conectar() {
 
         try {
-            String url = "jdbc:sqlite:DB/DB_StorageManager.db";
+
+            String url = "jdbc:sqlite:banco_de_dados/banco_sqlite.db";
+
             this.conexao = DriverManager.getConnection(url);
+
         } catch (SQLException e) {
             System.err.println(e.getMessage());
             return false;
         }
-        System.out.println("Conectado");
-        return true;
 
+        System.out.println("conectou!!!");
+
+        return true;
     }
 
-    public boolean desconectar(){
+    public boolean desconectar() {
 
-    
         try {
-           
-           if (this.conexao.isClosed() == false) {
-            this.conexao.close();
-               System.out.println("Desconectado");
+            if (this.conexao.isClosed() == false) {
+                this.conexao.close();
+            }
+
+        } catch (SQLException e) {
+
+            System.err.println(e.getMessage());
+            return false;
+        }
+        System.out.println("desconectou!!!");
+        return true;
+    }
+
+    /**
+     * Criar os statements para nossos sqls serem executados
+     *
+     * @return
+     */
+    public Statement criarStatement() {
+        try {
+            return this.conexao.createStatement();
+        } catch (SQLException e) {
+            return null;
         }
     }
-    catch (SQLException e
-
     
-        ) {
-            System.err.println(e.getMessage());
-        return false;
+    /**
+     * Criar os statements para nossos sqls serem executados
+     *
+     * @return
+     */
+    public PreparedStatement criarPreparedStatement(String sql) {
+        try {
+            return this.conexao.prepareStatement(sql);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    
+
+    public Connection getConexao() {
+        return this.conexao;
     }
 
-
-return true;
-
-    }
 }
