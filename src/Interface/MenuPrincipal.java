@@ -171,7 +171,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_SelecionarProdutoActionPerformed
 
     private void RemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverProdutoActionPerformed
-        RemoveMenu menu = new RemoveMenu(this, true);
+        RemoverMenu menu = new RemoveMenu(this, true);
         menu.setVisible(true);
     }//GEN-LAST:event_RemoverProdutoActionPerformed
 
