@@ -63,7 +63,7 @@ public class Select {
     }
 
 
-    public static void buscaProdutosNome(int nome) {
+    public static void buscaProdutosNome(String nome) {
 
         ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
 
@@ -80,7 +80,7 @@ public class Select {
             
                         
             preparedStatement = conexaoSQLite.criarPreparedStatement(sql);
-            preparedStatement.setInt(1, nome);
+            preparedStatement.setString(1, nome);
             
             resultSet = preparedStatement.executeQuery();
             
@@ -107,7 +107,7 @@ public class Select {
         }
         
     }
-        public static void buscaProdutosCategoria(int categoria) {
+        public static void buscaProdutosCategoria(String categoria) {
 
         ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
 
@@ -124,7 +124,7 @@ public class Select {
             
                         
             preparedStatement = conexaoSQLite.criarPreparedStatement(sql);
-            preparedStatement.setInt(1, categoria);
+            preparedStatement.setString(1, categoria);
             
             resultSet = preparedStatement.executeQuery();
             
