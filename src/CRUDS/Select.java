@@ -16,143 +16,157 @@ import java.sql.SQLException;
  */
 public class Select {
 
-   
-    public static void buscaProdutosCodigo(int codigo) {
+    public static String[] buscaProdutosCodigo(int codigo) {
 
         ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
 
         conexaoSQLite.conectar();
-        
+
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
-        
+        String encontrado;
+        String[] retornos;
+        retornos = null;
+        int i = 0;
         String sql = "SELECT * "
                 + " FROM tbl_produto"
                 + " WHERE codigo = ?;";
 
-        try{
-            
-                        
+        try {
+
             preparedStatement = conexaoSQLite.criarPreparedStatement(sql);
             preparedStatement.setInt(1, codigo);
-            
+
             resultSet = preparedStatement.executeQuery();
-            
+
             while (resultSet.next()) {
-                
-                System.out.println("PRODUTO SELECIONADO");
+
+                /*System.out.println("PRODUTO SELECIONADO");
                 System.out.println("CODIGO = " + resultSet.getInt("codigo"));
                 System.out.println("NOME = " + resultSet.getString("nome"));
                 System.out.println("CATEGORIA = " + resultSet.getString("categoria"));
                 System.out.println("QUANTIDADE = " + resultSet.getInt("quantidade"));
-                
+                 */
+                encontrado = Integer.toString(resultSet.getInt("codigo")) + "|" + resultSet.getString("nome") + "|" + resultSet.getString("categoria") + "|" + Integer.toString(resultSet.getInt("quantidade"));
+                retornos[i] = encontrado;
+                i++;
+
             }
-            
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
-            try{
+        } finally {
+            try {
                 resultSet.close();
                 preparedStatement.close();
                 conexaoSQLite.desconectar();
-            }catch(SQLException ex){
+            } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         }
-        
+        return retornos;
     }
 
-
-    public static void buscaProdutosNome(String nome) {
+    public static String[] buscaProdutosNome(String nome) {
 
         ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
 
         conexaoSQLite.conectar();
-        
+
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
-        
+        String encontrado;
+        String[] retornos;
+        retornos = null;
+        int i = 0;
         String sql = "SELECT * "
                 + " FROM tbl_produto"
                 + " WHERE nome = ?;";
 
-        try{
-            
-                        
+        try {
+
             preparedStatement = conexaoSQLite.criarPreparedStatement(sql);
             preparedStatement.setString(1, nome);
-            
+
             resultSet = preparedStatement.executeQuery();
-            
+
             while (resultSet.next()) {
-                
-                System.out.println("PRODUTO SELECIONADO");
+
+                /* System.out.println("PRODUTO SELECIONADO");
                 System.out.println("CODIGO = " + resultSet.getInt("codigo"));
                 System.out.println("NOME = " + resultSet.getString("nome"));
                 System.out.println("CATEGORIA = " + resultSet.getString("categoria"));
                 System.out.println("QUANTIDADE = " + resultSet.getInt("quantidade"));
-                
+                 */
+                encontrado = Integer.toString(resultSet.getInt("codigo")) + "|" + resultSet.getString("nome") + "|" + resultSet.getString("categoria") + "|" + Integer.toString(resultSet.getInt("quantidade"));
+                retornos[i] = encontrado;
+                i++;
+
             }
-            
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
-            try{
+        } finally {
+            try {
                 resultSet.close();
                 preparedStatement.close();
                 conexaoSQLite.desconectar();
-            }catch(SQLException ex){
+            } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         }
-        
+        return retornos;
     }
-        public static void buscaProdutosCategoria(String categoria) {
+
+    public static String[] buscaProdutosCategoria(String categoria) {
 
         ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
 
         conexaoSQLite.conectar();
-        
+
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
-        
+        String encontrado;
+        String[] retornos;
+        retornos = null;
+        int i = 0;
         String sql = "SELECT * "
                 + " FROM tbl_produto"
                 + " WHERE categoria = ?;";
 
-        try{
-            
-                        
+        try {
+
             preparedStatement = conexaoSQLite.criarPreparedStatement(sql);
             preparedStatement.setString(1, categoria);
-            
+
             resultSet = preparedStatement.executeQuery();
-            
+
             while (resultSet.next()) {
-                
+                /*
                 System.out.println("PRODUTO SELECIONADO");
                 System.out.println("CODIGO = " + resultSet.getInt("codigo"));
                 System.out.println("NOME = " + resultSet.getString("nome"));
                 System.out.println("CATEGORIA = " + resultSet.getString("categoria"));
                 System.out.println("QUANTIDADE = " + resultSet.getInt("quantidade"));
-                
+                 */
+                encontrado = Integer.toString(resultSet.getInt("codigo")) + "|" + resultSet.getString("nome") + "|" + resultSet.getString("categoria") + "|" + Integer.toString(resultSet.getInt("quantidade"));
+                retornos[i] = encontrado;
+                i++;
+
             }
-            
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
-            try{
+        } finally {
+            try {
                 resultSet.close();
                 preparedStatement.close();
                 conexaoSQLite.desconectar();
-            }catch(SQLException ex){
+            } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         }
-        
+        return retornos;
     }
 
 }
-
-
-
