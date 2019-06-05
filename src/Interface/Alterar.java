@@ -29,21 +29,67 @@ public class Alterar extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        codigoprodLabel = new javax.swing.JLabel();
+        codigoField = new javax.swing.JTextField();
+        verificarCodigoButton = new javax.swing.JButton();
+        quantidadeNovaLabel = new javax.swing.JLabel();
+        quantidadeNovaField = new javax.swing.JTextField();
+        alterarButton = new javax.swing.JToggleButton();
+        cancelarButton = new javax.swing.JToggleButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Alterar Quantidade");
+        getContentPane().setLayout(new java.awt.GridLayout(7, 1));
+
+        codigoprodLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        codigoprodLabel.setText("Codigo do Produto");
+        getContentPane().add(codigoprodLabel);
+
+        codigoField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codigoFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(codigoField);
+
+        verificarCodigoButton.setText("Verificar Codigo");
+        verificarCodigoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verificarCodigoButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(verificarCodigoButton);
+
+        quantidadeNovaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        quantidadeNovaLabel.setText("Nova Quantidade");
+        getContentPane().add(quantidadeNovaLabel);
+        getContentPane().add(quantidadeNovaField);
+
+        alterarButton.setText("Alterar");
+        getContentPane().add(alterarButton);
+
+        cancelarButton.setText("Cancelar");
+        cancelarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cancelarButton);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void verificarCodigoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificarCodigoButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_verificarCodigoButtonActionPerformed
+
+    private void codigoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codigoFieldActionPerformed
+
+    private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -88,5 +134,12 @@ public class Alterar extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton alterarButton;
+    private javax.swing.JToggleButton cancelarButton;
+    private javax.swing.JTextField codigoField;
+    private javax.swing.JLabel codigoprodLabel;
+    private javax.swing.JTextField quantidadeNovaField;
+    private javax.swing.JLabel quantidadeNovaLabel;
+    private javax.swing.JButton verificarCodigoButton;
     // End of variables declaration//GEN-END:variables
 }

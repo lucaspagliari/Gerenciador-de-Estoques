@@ -150,12 +150,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
           Alterar menu = new Alterar(this, true);
           menu.setVisible(true);
     }//GEN-LAST:event_AlterarProdutoActionPerformed
-/*
+
     private void SelecionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecionarProdutoActionPerformed
-         Selecionar menu = new Selecionar(this, true);
-         menu.setVisible(true);
+//         Selecionar menu = new Selecionar(this, true);
+//         menu.setVisible(true);
     }//GEN-LAST:event_SelecionarProdutoActionPerformed
-*/
+
     private void RemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverProdutoActionPerformed
         Remover menu = new Remover(this, true);
         menu.setVisible(true);
