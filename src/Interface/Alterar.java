@@ -5,6 +5,10 @@
  */
 package Interface;
 
+import javax.swing.JOptionPane;
+import CRUDS.Select;
+import CRUDS.Update;
+
 /**
  *
  * @author Lucas
@@ -80,7 +84,28 @@ public class Alterar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void verificarCodigoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificarCodigoButtonActionPerformed
-        // TODO add your handling code here:
+        if (codigoField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Codigo precisa ser preenchido",
+                        "Input Error", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                Integer.parseInt(codigoField.getText());
+
+            } catch (NumberFormatException nfe) {
+                System.out.println(nfe);
+                JOptionPane.showMessageDialog(this, "Codigo precisa ser inteiro",
+                        "Input Error", JOptionPane.WARNING_MESSAGE);
+            }
+            // Teste com banco de dados
+            if(true){
+                
+            }
+        }
+        
+        
+        
+        
+        
     }//GEN-LAST:event_verificarCodigoButtonActionPerformed
 
     private void codigoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoFieldActionPerformed

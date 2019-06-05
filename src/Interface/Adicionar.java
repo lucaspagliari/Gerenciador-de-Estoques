@@ -116,6 +116,14 @@ public class Adicionar extends javax.swing.JDialog {
         if (codigoField.getText().isEmpty() || codigoField.getText().length() != 4) {
             JOptionPane.showMessageDialog(this, "Codigo deve ter 4 digitos",
                     "Input Error", JOptionPane.WARNING_MESSAGE);
+            try {
+                Integer.parseInt(codigoField.getText());
+
+            } catch (NumberFormatException nfe) {
+                System.out.println(nfe);
+                JOptionPane.showMessageDialog(this, "Valor precisa ser inteiro",
+                        "Input Error", JOptionPane.WARNING_MESSAGE);
+            }
         } // Nome do Produto
         else if (nomeField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Nome nao pode estar em branco",
