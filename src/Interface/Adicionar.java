@@ -5,6 +5,8 @@
  */
 package Interface;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lucas
@@ -29,8 +31,8 @@ public class Adicionar extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        idLabel = new javax.swing.JLabel();
-        idField = new javax.swing.JTextField();
+        codigoLabel = new javax.swing.JLabel();
+        codigoField = new javax.swing.JTextField();
         nomeLabel = new javax.swing.JLabel();
         nomeField = new javax.swing.JTextField();
         categoriaLabel = new javax.swing.JLabel();
@@ -44,16 +46,16 @@ public class Adicionar extends javax.swing.JDialog {
         setTitle("Adicionar");
         getContentPane().setLayout(new java.awt.GridLayout(5, 2, 6, 6));
 
-        idLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        idLabel.setText("Codigo");
-        getContentPane().add(idLabel);
+        codigoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        codigoLabel.setText("Codigo");
+        getContentPane().add(codigoLabel);
 
-        idField.addActionListener(new java.awt.event.ActionListener() {
+        codigoField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idFieldActionPerformed(evt);
+                codigoFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(idField);
+        getContentPane().add(codigoField);
 
         nomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nomeLabel.setText("Nome");
@@ -78,6 +80,11 @@ public class Adicionar extends javax.swing.JDialog {
         getContentPane().add(quantidadeField);
 
         adicionarButton.setText("Adicionar");
+        adicionarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adicionarButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(adicionarButton);
 
         cancelarButton.setText("Cancelar");
@@ -95,13 +102,42 @@ public class Adicionar extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_categoriaComboBoxActionPerformed
 
-    private void idFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idFieldActionPerformed
+    private void codigoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_idFieldActionPerformed
+    }//GEN-LAST:event_codigoFieldActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancelarButtonActionPerformed
+
+    private void adicionarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarButtonActionPerformed
+        // Verificando Entradas
+        // Codigo
+        if (codigoField.getText().isEmpty() || codigoField.getText().length() != 4) {
+            JOptionPane.showMessageDialog(this, "Codigo deve ter 4 digitos",
+                    "Input Error", JOptionPane.WARNING_MESSAGE);
+        } // Nome do Produto
+        else if (nomeField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nome nao pode estar em branco",
+                    "Input Error", JOptionPane.WARNING_MESSAGE);
+        } else {
+            // Quantidade: Verifica Valor Nulo;
+            if (quantidadeField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Quantidade não foi preenchida",
+                        "Input Error", JOptionPane.WARNING_MESSAGE);
+            } else {
+                //Quantidade: Verifica Valor Inteiro
+                try {
+                    Integer.parseInt(quantidadeField.getText());
+
+                } catch (NumberFormatException nfe) {
+                    System.out.println(nfe);
+                    JOptionPane.showMessageDialog(this, "Valor precisa ser inteiro",
+                            "Input Error", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_adicionarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -117,16 +153,24 @@ public class Adicionar extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Adicionar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Adicionar.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Adicionar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Adicionar.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Adicionar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Adicionar.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Adicionar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Adicionar.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -150,8 +194,8 @@ public class Adicionar extends javax.swing.JDialog {
     private javax.swing.JButton cancelarButton;
     private javax.swing.JComboBox<String> categoriaComboBox;
     private javax.swing.JLabel categoriaLabel;
-    private javax.swing.JTextField idField;
-    private javax.swing.JLabel idLabel;
+    private javax.swing.JTextField codigoField;
+    private javax.swing.JLabel codigoLabel;
     private javax.swing.JTextField nomeField;
     private javax.swing.JLabel nomeLabel;
     private javax.swing.JTextField quantidadeField;
