@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class Select {
 
-    public static String[] buscaProdutosCodigo(int codigo) {
+    public static String buscaProdutosCodigo(int codigo) {
 
         ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
 
@@ -24,9 +24,8 @@ public class Select {
 
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
-        String encontrado;
-        String[] retornos;
-        retornos = null;
+        String encontrado = "vazio";
+      
         int i = 0;
         String sql = "SELECT * "
                 + " FROM tbl_produto"
@@ -48,8 +47,7 @@ public class Select {
                 System.out.println("QUANTIDADE = " + resultSet.getInt("quantidade"));
                  */
                 encontrado = Integer.toString(resultSet.getInt("codigo")) + "|" + resultSet.getString("nome") + "|" + resultSet.getString("categoria") + "|" + Integer.toString(resultSet.getInt("quantidade"));
-                retornos[i] = encontrado;
-                i++;
+               
 
             }
 
@@ -64,7 +62,7 @@ public class Select {
                 ex.printStackTrace();
             }
         }
-        return retornos;
+        return encontrado;
     }
 
     public static String[] buscaProdutosNome(String nome) {

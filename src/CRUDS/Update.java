@@ -22,7 +22,7 @@ public class Update {
 
         conexaoSQLite.conectar();
         
-        ResultSet resultSet = null;
+       // ResultSet resultSet = null;
         
         PreparedStatement preparedStatement = null;
         
@@ -35,10 +35,10 @@ public class Update {
             
                         
             preparedStatement = conexaoSQLite.criarPreparedStatement(sql);
-            preparedStatement.setInt(1, quantidade);
-            preparedStatement.setInt(2, codigo);
+            preparedStatement.setInt(2, quantidade);
+            preparedStatement.setInt(1, codigo);
             
-            resultSet = preparedStatement.executeQuery();
+           /* resultSet = preparedStatement.executeQuery();
             
             while (resultSet.next()) {
                 
@@ -48,13 +48,13 @@ public class Update {
                 System.out.println("CATEGORIA = " + resultSet.getString("categoria"));
                 System.out.println("QUANTIDADE = " + resultSet.getInt("quantidade"));
                 
-            }
+            }*/
             
         }catch(SQLException e){
             e.printStackTrace();
         }finally{
             try{
-                resultSet.close();
+            //    resultSet.close();
                 preparedStatement.close();
                 conexaoSQLite.desconectar();
             }catch(SQLException ex){
@@ -69,7 +69,7 @@ public static void updateProdutosNome(int codigo, String nome) {
 
         conexaoSQLite.conectar();
         
-        ResultSet resultSet = null;
+        //ResultSet resultSet = null;
         
         PreparedStatement preparedStatement = null;
         
@@ -82,10 +82,10 @@ public static void updateProdutosNome(int codigo, String nome) {
             
                         
             preparedStatement = conexaoSQLite.criarPreparedStatement(sql);
-            preparedStatement.setString(1, nome);
-            preparedStatement.setInt(2, codigo);
+            preparedStatement.setString(2, nome);
+            preparedStatement.setInt(1, codigo);
             
-            resultSet = preparedStatement.executeQuery();
+           /*resultSet = preparedStatement.executeQuery();
             
             while (resultSet.next()) {
                 
@@ -95,13 +95,13 @@ public static void updateProdutosNome(int codigo, String nome) {
                 System.out.println("CATEGORIA = " + resultSet.getString("categoria"));
                 System.out.println("QUANTIDADE = " + resultSet.getInt("quantidade"));
                 
-            }
+            }*/
             
         }catch(SQLException e){
             e.printStackTrace();
         }finally{
             try{
-                resultSet.close();
+                //resultSet.close();
                 preparedStatement.close();
                 conexaoSQLite.desconectar();
             }catch(SQLException ex){
@@ -116,7 +116,7 @@ public static void updateProdutosCategoria(int codigo, String categoria) {
 
         conexaoSQLite.conectar();
         
-        ResultSet resultSet = null;
+       // ResultSet resultSet = null;
         
         PreparedStatement preparedStatement = null;
         
@@ -129,10 +129,10 @@ public static void updateProdutosCategoria(int codigo, String categoria) {
             
                         
             preparedStatement = conexaoSQLite.criarPreparedStatement(sql);
-            preparedStatement.setString(1, categoria);
-            preparedStatement.setInt(2, codigo);
+            preparedStatement.setString(2, categoria);
+            preparedStatement.setInt(1, codigo);
             
-            resultSet = preparedStatement.executeQuery();
+         /*   resultSet = preparedStatement.executeQuery();
             
             while (resultSet.next()) {
                 
@@ -142,13 +142,13 @@ public static void updateProdutosCategoria(int codigo, String categoria) {
                 System.out.println("CATEGORIA = " + resultSet.getString("categoria"));
                 System.out.println("QUANTIDADE = " + resultSet.getInt("quantidade"));
                 
-            }
+            }*/
             
         }catch(SQLException e){
             e.printStackTrace();
         }finally{
             try{
-                resultSet.close();
+               // resultSet.close();
                 preparedStatement.close();
                 conexaoSQLite.desconectar();
             }catch(SQLException ex){

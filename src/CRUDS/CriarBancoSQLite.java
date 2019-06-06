@@ -27,7 +27,7 @@ public class CriarBancoSQLite {
                 + "("
                 + "codigo integer PRIMARY KEY,"
                 + "nome text NOT NULL,"
-                + "categoria text"
+                + "categoria text,"
                 + "quantidade integer NOT NULL"
                 + ");";
 

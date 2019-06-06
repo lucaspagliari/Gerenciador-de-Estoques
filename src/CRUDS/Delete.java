@@ -22,8 +22,7 @@ public class Delete {
 
         conexaoSQLite.conectar();
 
-        ResultSet resultSet = null;
-
+        //ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
 
         String sql = "DELETE FROM  tbl_produto "
@@ -33,8 +32,8 @@ public class Delete {
 
             preparedStatement = conexaoSQLite.criarPreparedStatement(sql);
             preparedStatement.setInt(1, codigo);
-
-            resultSet = preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
+            /* resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
 
@@ -44,13 +43,13 @@ public class Delete {
                 System.out.println("CATEGORIA = " + resultSet.getString("categoria"));
                 System.out.println("QUANTIDADE = " + resultSet.getInt("quantidade"));
 
-            }
+            }*/
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                resultSet.close();
+                // resultSet.close();
                 preparedStatement.close();
                 conexaoSQLite.desconectar();
             } catch (SQLException ex) {

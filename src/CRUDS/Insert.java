@@ -40,9 +40,9 @@ public class Insert {
         String sqlInsert = " INSERT INTO tbl_produto ("
                 + "codigo,"
                 + "nome,"
-                + "categoria"
+                + "categoria,"
                 + "quantidade"
-                + ") VALUES(?,?,?)"
+                + ") VALUES(?,?,?,?)"
                 + ";";
 
         PreparedStatement preparedStatement = conexaoSQLite.criarPreparedStatement(sqlInsert);
