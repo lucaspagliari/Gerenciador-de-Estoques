@@ -5,6 +5,9 @@
  */
 package Interface;
 
+import CRUDS.Delete;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lucas
@@ -40,6 +43,11 @@ public class Remover extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         removerButton.setText("Remover");
+        removerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removerButtonActionPerformed(evt);
+            }
+        });
 
         codigoLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         codigoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -112,13 +120,31 @@ public class Remover extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelarButtonActionPerformed
+
     private void verificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificarButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_verificarButtonActionPerformed
 
-    private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_cancelarButtonActionPerformed
+    private void removerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerButtonActionPerformed
+        boolean valida = true;
+        try{
+            Integer.parseInt(codigoField.getText());
+        }catch(NumberFormatException nfe){
+            JOptionPane.showMessageDialog(this, "Codigo Invalido",
+                    "Input Error", JOptionPane.WARNING_MESSAGE);
+            valida = false;
+        }
+        if (valida) {
+            Delete.deleteProdutos(Integer.parseInt(codigoField.getText()));
+            JOptionPane.showMessageDialog(this, "Produto Removido",
+                    "Info", JOptionPane.PLAIN_MESSAGE);
+            this.dispose();
+        }
+        
+    }//GEN-LAST:event_removerButtonActionPerformed
 
     /**
      * @param args the command line arguments
