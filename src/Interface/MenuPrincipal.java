@@ -1,12 +1,56 @@
-
 package Interface;
 
+import conexoes.ConexaoSQLite;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
     public MenuPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
+
+        ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
+
+        conexaoSQLite.conectar();
+
+        ResultSet resultSet = null;
+        PreparedStatement preparedStatement = null;
+        String encontrado = "vazio";
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+
+        int i = 0;
+        String sql = "SELECT * "
+                + " FROM tbl_produto;";
+
+        try {
+
+            preparedStatement = conexaoSQLite.criarPreparedStatement(sql);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Object[] row = {resultSet.getInt("codigo"),
+                    resultSet.getString("nome"),
+                    resultSet.getString("categoria"),
+                    resultSet.getInt("quantidade")};
+
+                model.addRow(row);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                resultSet.close();
+                preparedStatement.close();
+                conexaoSQLite.desconectar();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -20,7 +64,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         AlterarProduto = new javax.swing.JButton();
         SelecionarProduto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabela = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         sairItemMenu = new javax.swing.JMenuItem();
@@ -51,16 +95,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        SelecionarProduto.setText("Selecionar");
+        SelecionarProduto.setText("Atualizar");
         SelecionarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SelecionarProdutoActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "Código", "Nome", "Categoria", "Quantidade"
@@ -74,7 +118,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabela);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,15 +186,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarProdutoActionPerformed
-         Adicionar menu = new Adicionar(this, true);
-         menu.setSize(300,200);
-         menu.setVisible(true);
+        Adicionar menu = new Adicionar(this, true);
+        menu.setSize(300, 200);
+        menu.setVisible(true);
     }//GEN-LAST:event_AdicionarProdutoActionPerformed
 
     private void AlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarProdutoActionPerformed
-          Alterar menu = new Alterar(this, true);
-          menu.setSize(200,310);
-          menu.setVisible(true);
+        Alterar menu = new Alterar(this, true);
+        menu.setSize(200, 310);
+        menu.setVisible(true);
     }//GEN-LAST:event_AlterarProdutoActionPerformed
 
     private void RemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverProdutoActionPerformed
@@ -159,8 +203,54 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_RemoverProdutoActionPerformed
 
     private void SelecionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecionarProdutoActionPerformed
-        //         Selecionar menu = new Selecionar(this, true);
-        //         menu.setVisible(true);
+        ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
+
+        conexaoSQLite.conectar();
+
+        ResultSet resultSet = null;
+        PreparedStatement preparedStatement = null;
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+        model.getDataVector().removeAllElements();
+        /*for (int j = 0; j < model.getRowCount(); j++) {
+            model.removeRow(j);
+            for (int f = 0; f < model.getRowCount(); f++) {
+                model.removeRow(f);
+            }
+        }*/
+        
+
+        int i = 0;
+        String sql = "SELECT * "
+                + " FROM tbl_produto;";
+
+        try {
+
+            preparedStatement = conexaoSQLite.criarPreparedStatement(sql);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Object[] row = {resultSet.getInt("codigo"),
+                    resultSet.getString("nome"),
+                    resultSet.getString("categoria"),
+                    resultSet.getInt("quantidade")};
+                model.addRow(row);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                resultSet.close();
+                preparedStatement.close();
+                conexaoSQLite.desconectar();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+
     }//GEN-LAST:event_SelecionarProdutoActionPerformed
 
     /**
@@ -208,7 +298,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem sairItemMenu;
+    private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

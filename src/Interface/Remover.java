@@ -6,6 +6,7 @@
 package Interface;
 
 import CRUDS.Delete;
+import CRUDS.Select;
 import javax.swing.JOptionPane;
 
 /**
@@ -82,21 +83,20 @@ public class Remover extends javax.swing.JDialog {
                     .addComponent(cancelarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(produtoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(infoProdutoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 25, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(produtoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(codigoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(codigoField, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(verificarButton)))
-                                .addGap(15, 15, 15)))))
+                                .addComponent(codigoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(codigoField, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(verificarButton)))
+                        .addGap(15, 15, 15)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(infoProdutoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(96, 96, 96))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,13 +126,31 @@ public class Remover extends javax.swing.JDialog {
 
     private void verificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificarButtonActionPerformed
         // TODO add your handling code here:
+        boolean valida = true;
+        try {
+            Integer.parseInt(codigoField.getText());
+        } catch (NumberFormatException nfe) {
+            System.out.println(nfe);
+            JOptionPane.showMessageDialog(this, "Codigo precisa ser inteiro",
+                    "Input Error", JOptionPane.WARNING_MESSAGE);
+            valida = false;
+        }
+        // Teste com banco de dados
+        if (valida) {
+            String info[] = Select.buscaProdutosCodigo(Integer.parseInt(codigoField.getText())).split("\\|");
+            if (!info[0].isEmpty()) {
+                infoProdutoLabel.setText(info[1] + ": " + info[3] + " unidades");
+            }
+        }
+
+
     }//GEN-LAST:event_verificarButtonActionPerformed
 
     private void removerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerButtonActionPerformed
         boolean valida = true;
-        try{
+        try {
             Integer.parseInt(codigoField.getText());
-        }catch(NumberFormatException nfe){
+        } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(this, "Codigo Invalido",
                     "Input Error", JOptionPane.WARNING_MESSAGE);
             valida = false;
@@ -143,7 +161,7 @@ public class Remover extends javax.swing.JDialog {
                     "Info", JOptionPane.PLAIN_MESSAGE);
             this.dispose();
         }
-        
+
     }//GEN-LAST:event_removerButtonActionPerformed
 
     /**

@@ -36,8 +36,8 @@ public class Alterar extends javax.swing.JDialog {
         codigoprodLabel = new javax.swing.JLabel();
         codigoField = new javax.swing.JTextField();
         verificarCodigoButton = new javax.swing.JButton();
-        quantidadeNovaLabel = new javax.swing.JLabel();
-        quantidadeNovaField = new javax.swing.JTextField();
+        quantidadeLabel = new javax.swing.JLabel();
+        quantidadeField = new javax.swing.JTextField();
         alterarButton = new javax.swing.JToggleButton();
         cancelarButton = new javax.swing.JToggleButton();
 
@@ -64,12 +64,23 @@ public class Alterar extends javax.swing.JDialog {
         });
         getContentPane().add(verificarCodigoButton);
 
-        quantidadeNovaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        quantidadeNovaLabel.setText("Nova Quantidade");
-        getContentPane().add(quantidadeNovaLabel);
-        getContentPane().add(quantidadeNovaField);
+        quantidadeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        quantidadeLabel.setText("Nova Quantidade");
+        getContentPane().add(quantidadeLabel);
+
+        quantidadeField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quantidadeFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(quantidadeField);
 
         alterarButton.setText("Alterar");
+        alterarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alterarButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(alterarButton);
 
         cancelarButton.setText("Cancelar");
@@ -84,28 +95,25 @@ public class Alterar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void verificarCodigoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificarCodigoButtonActionPerformed
-        if (codigoField.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Codigo precisa ser preenchido",
-                        "Input Error", JOptionPane.WARNING_MESSAGE);
-        } else {
-            try {
-                Integer.parseInt(codigoField.getText());
-
-            } catch (NumberFormatException nfe) {
-                System.out.println(nfe);
-                JOptionPane.showMessageDialog(this, "Codigo precisa ser inteiro",
-                        "Input Error", JOptionPane.WARNING_MESSAGE);
-            }
-            // Teste com banco de dados
-            if(true){
-                
+        boolean valida = true;
+        try {
+            Integer.parseInt(codigoField.getText());            
+        } catch (NumberFormatException nfe) {
+            System.out.println(nfe);
+            JOptionPane.showMessageDialog(this, "Codigo precisa ser inteiro",
+                    "Input Error", JOptionPane.WARNING_MESSAGE);
+            valida = false;
+        }
+        // Teste com banco de dados
+        if (valida) {
+            String info[] = Select.buscaProdutosCodigo(Integer.parseInt(codigoField.getText())).split("\\|");
+            if(!info[0].isEmpty()){
+                JOptionPane.showMessageDialog(this, "Produto: " + info[1],
+                    "Existente", JOptionPane.DEFAULT_OPTION);
             }
         }
-        
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_verificarCodigoButtonActionPerformed
 
     private void codigoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoFieldActionPerformed
@@ -115,6 +123,32 @@ public class Alterar extends javax.swing.JDialog {
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancelarButtonActionPerformed
+
+    private void alterarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarButtonActionPerformed
+        boolean valida = true;
+        try {
+            Integer.parseInt(codigoField.getText());
+            Integer.parseInt(quantidadeField.getText());
+
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "Valor(es) Invalido(s)",
+                    "Input Error", JOptionPane.WARNING_MESSAGE);
+            valida = false;
+        }
+        if (valida) {
+            Update.updateProdutosQuantidade(
+                    Integer.parseInt(codigoField.getText()),
+                    Integer.parseInt(quantidadeField.getText()));
+            JOptionPane.showMessageDialog(this, "Quantidade Atualizada",
+                    "Info", JOptionPane.WARNING_MESSAGE);
+            this.dispose();
+        }
+
+    }//GEN-LAST:event_alterarButtonActionPerformed
+
+    private void quantidadeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantidadeFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quantidadeFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,8 +197,8 @@ public class Alterar extends javax.swing.JDialog {
     private javax.swing.JToggleButton cancelarButton;
     private javax.swing.JTextField codigoField;
     private javax.swing.JLabel codigoprodLabel;
-    private javax.swing.JTextField quantidadeNovaField;
-    private javax.swing.JLabel quantidadeNovaLabel;
+    private javax.swing.JTextField quantidadeField;
+    private javax.swing.JLabel quantidadeLabel;
     private javax.swing.JButton verificarCodigoButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -46,18 +46,24 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="verificarCodigoButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="quantidadeNovaLabel">
+    <Component class="javax.swing.JLabel" name="quantidadeLabel">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Nova Quantidade"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="quantidadeNovaField">
+    <Component class="javax.swing.JTextField" name="quantidadeField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quantidadeFieldActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="alterarButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alterar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="alterarButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="cancelarButton">
       <Properties>
