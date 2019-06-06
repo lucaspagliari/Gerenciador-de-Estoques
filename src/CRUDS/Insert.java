@@ -32,7 +32,8 @@ public class Insert {
         ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
 
         conexaoSQLite.conectar();
-        String sqlInsert = " INSERT INTO tbl_produto ("+ codigo +", "+ nome +
+        String sqlInsert = " INSERT INTO tbl_produto (codigo, nome, categoria, quantidade)"
+                + "VALUES("+ codigo +", "+ nome +
                 "," + categoria +", " + quantidade +");";
 
         stmt = conexaoSQLite.criarStatement();
