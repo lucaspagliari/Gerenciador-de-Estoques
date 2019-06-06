@@ -47,7 +47,7 @@ public class Main {
        Update.updateProdutosQuantidade(codigo, quantidade);
         //chamada de delete
         
-       Delete.deleteProdutos(codigo);//só da para deletar pelo codigo!
+       //Delete.deleteProdutos(codigo);//só da para deletar pelo codigo!
 
     }
 }

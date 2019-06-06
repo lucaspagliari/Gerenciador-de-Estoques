@@ -6,6 +6,7 @@
 package Interface;
 
 import javax.swing.JOptionPane;
+import CRUDS.Insert;
 
 /**
  *
@@ -66,7 +67,7 @@ public class Adicionar extends javax.swing.JDialog {
         categoriaLabel.setText("Categoria");
         getContentPane().add(categoriaLabel);
 
-        categoriaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        categoriaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bebidas", "Limpeza", "Carne" }));
         categoriaComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 categoriaComboBoxActionPerformed(evt);
@@ -111,11 +112,13 @@ public class Adicionar extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
     private void adicionarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarButtonActionPerformed
-        // Verificando Entradas
+        boolean valida = true;
+// Verificando Entradas
         // Codigo
-        if (codigoField.getText().isEmpty() || codigoField.getText().length() != 4) {
-            JOptionPane.showMessageDialog(this, "Codigo deve ter 4 digitos",
+        if (codigoField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Codigo Invalido",
                     "Input Error", JOptionPane.WARNING_MESSAGE);
+
             try {
                 Integer.parseInt(codigoField.getText());
 
@@ -123,16 +126,21 @@ public class Adicionar extends javax.swing.JDialog {
                 System.out.println(nfe);
                 JOptionPane.showMessageDialog(this, "Valor precisa ser inteiro",
                         "Input Error", JOptionPane.WARNING_MESSAGE);
+                valida = false;
             }
         } // Nome do Produto
         else if (nomeField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Nome nao pode estar em branco",
                     "Input Error", JOptionPane.WARNING_MESSAGE);
+            valida = false;
+
         } else {
             // Quantidade: Verifica Valor Nulo;
             if (quantidadeField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Quantidade não foi preenchida",
                         "Input Error", JOptionPane.WARNING_MESSAGE);
+                valida = false;
+
             } else {
                 //Quantidade: Verifica Valor Inteiro
                 try {
@@ -142,9 +150,33 @@ public class Adicionar extends javax.swing.JDialog {
                     System.out.println(nfe);
                     JOptionPane.showMessageDialog(this, "Valor precisa ser inteiro",
                             "Input Error", JOptionPane.WARNING_MESSAGE);
+                    valida = false;
+
                 }
             }
         }
+        
+        int i = categoriaComboBox.getSelectedIndex();
+        String categoria = "indefinido";
+        switch(i){
+            case 0:
+                categoria = "bebidas";
+                break;
+            case 1:
+                categoria = "limpeza";
+                break;
+            case 2:
+                categoria = "carnes";
+                break;
+        }  
+        if (valida) {
+            Insert.inserirProduto(Integer.parseInt(codigoField.getText()), 
+                    nomeField.getText(),
+                    categoria, 
+                    Integer.parseInt(quantidadeField.getText()));
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_adicionarButtonActionPerformed
 
     /**
