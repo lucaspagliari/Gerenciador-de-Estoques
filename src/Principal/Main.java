@@ -23,8 +23,9 @@ public class Main {
         ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
         CriarBancoSQLite criarBancoSQLite = new CriarBancoSQLite(conexaoSQLite);
 
-        criarBancoSQLite.criarTabelaPessoa();
-        //Variaveis necessarias para manipulação;
+        //criarBancoSQLite.criarTabelaPessoa();
+        
+//Variaveis necessarias para manipulação;
         int codigo, quantidade;
         String nome, categoria;
         String[] linhadadosbusca;// esta vai vir com os dados separados por "|" tem que quebra e converter se quiser manipular
@@ -42,11 +43,11 @@ public class Main {
         linhadadosbusca = Select.buscaProdutosCategoria(categoria);//busca por categoria
         linhadadosbusca = Select.buscaProdutosNome(nome);//busca por nome
         //chamadas de update
-        Update.updateProdutosCategoria(codigo, categoria);//updade de categoria. baseado em codigo sempre!
-        Update.updateProdutosNome(codigo, nome);//update de nome (sim puta comentario desnecessario kkkkk)
-        Update.updateProdutosQuantidade(codigo, quantidade);
+        //Update.updateProdutosCategoria(codigo, categoria);//updade de categoria. baseado em codigo sempre!
+        //Update.updateProdutosNome(codigo, nome);//update de nome (sim puta comentario desnecessario kkkkk)
+        //Update.updateProdutosQuantidade(codigo, quantidade);;
         //chamada de delete
-        Delete.deleteProdutos(codigo);//só da para deletar pela categoria!
+        //Delete.deleteProdutos(codigo);//só da para deletar pela categoria!
 
     }
 }
